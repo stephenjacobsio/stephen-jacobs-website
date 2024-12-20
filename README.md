@@ -129,19 +129,3 @@ The site layout is component-based. Main components can be found in `src/compone
 
 ### Content
 Update the content files in `src/data/` to change the displayed information. The TypeScript types ensure content structure remains consistent.
-
-## License
-
-MIT License - See LICENSE file for details.
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch: `git checkout -b feature/new-feature`
-3. Commit your changes: `git commit -m 'Add new feature'`
-4. Push to the branch: `git push origin feature/new-feature`
-5. Submit a pull request
-
-## Contact
-
-For questions or suggestions, please open an issue in the repository.
