@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================= */
+/* Base Layer: Global Styles     */
+/* ============================= */
+@layer base {
+  body {
+    @apply antialiased transition-colors duration-200 ease-in-out;
+  }
+
+  /* Custom scrollbar styling */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: theme("colors.gray.700") theme("colors.gray.900");
+  }
+
+  *::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  *::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded-full border-2 border-transparent;
+    background-clip: content-box;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-600;
+  }
+
+  /* Text selection styling */
+  ::selection {
+    @apply bg-cyan-400 text-gray-900;
+  }
+}
+
+/* ============================= */
+/* Components Layer: Reusable UI */
+/* ============================= */
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-mono text-sm transition-all duration-200 ease-in-out;
+  }
+
+  .btn-primary {
+    @apply bg-cyan-500 text-gray-900 hover:bg-cyan-600;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-700 text-gray-100 hover:bg-gray-600;
+  }
+
+  .card {
+    @apply p-4 rounded-lg border transition-all duration-200 ease-in-out hover:border-cyan-500/50;
+  }
+}
