@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+  labels:
+    app: frontend
+data:
+  NEXT_PUBLIC_API_URL: "https://stephenjacobs.io/api"
+  NEXT_PUBLIC_LOG_LEVEL: "info"
+  NEXT_PUBLIC_ANALYTICS_ID: "UA-123456789-0"
