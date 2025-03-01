@@ -1,0 +1,21 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../dist/backend",
+    "rootDir": ".",
+    "module": "commonjs",
+    "target": "ES2020",
+    "noEmit": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "lib": ["esnext"],
+    "paths": {
+      "@entities/*": ["./entities/*"],
+      "@controllers/*": ["./controllers/*"]
+    }
+  },
+  "include": ["./**/*"],
+  "exclude": ["node_modules", "dist"]
+}

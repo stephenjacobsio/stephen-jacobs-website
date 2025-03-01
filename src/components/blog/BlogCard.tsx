@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Calendar } from "lucide-react";
-import type { BlogPost } from "@/types";
+import {Calendar} from "lucide-react";
+import type {BlogPost} from "@/types";
 
 interface BlogCardProps {
   post: BlogPost;

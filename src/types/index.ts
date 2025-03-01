@@ -29,6 +29,7 @@ export interface BlogPost {
 }
 
 export interface Technology {
+    id: string;
   name: string;
   category: string;
   relatedProjects?: string[];
@@ -38,6 +39,7 @@ export interface Technology {
 }
 
 export interface SocialLink {
+    id: string;
   platform: string;
   url: string;
   label: string;
@@ -45,32 +47,8 @@ export interface SocialLink {
   visible?: boolean;
 }
 
-export interface NavigationItem {
-  label: string;
-  path: string;
-  icon?: string;
-  requiresAuth?: boolean;
-}
-
-export interface WorkExperience {
-  title: string;
-  company: string;
-  period: string;
-  description: string[];
-  location?: string;
-  remote?: boolean;
-}
-
-export interface Certification {
-  name: string;
-  issuer: string;
-  date: string;
-  credentialUrl?: string;
-  credentialId?: string;
-  expires?: string;
-}
-
 export interface Education {
+    id: string;
   degree: string;
   school: string;
   period: string;
