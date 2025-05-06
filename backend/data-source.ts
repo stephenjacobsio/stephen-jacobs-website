@@ -12,7 +12,11 @@ import { entities } from "./entities";
 // Set up the data source
 export const AppDataSource = new DataSource({
   type: "postgres",
-  url: process.env.DATABASE_URL,
+  host: "localhost",
+  port: 5432,
+  username: "stephen",
+  password: "",
+  database: "stephenjacobsio",
   synchronize: false,
   logging: process.env.NODE_ENV !== "production",
   entities: entities,

@@ -15,21 +15,21 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
 }) => {
   return (
     <div
-      className={`rounded-lg border shadow-xl overflow-hidden transition-colors duration-200 
+      className={`rounded-xl border shadow-xl overflow-hidden transition-all duration-300 
         bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700 ${className}`}
     >
       {/* Terminal header */}
       <div
-        className={`flex items-center justify-between p-4 border-b 
+        className={`flex items-center justify-between px-4 py-3 border-b 
           bg-gray-100 border-gray-200 dark:bg-gray-900 dark:border-gray-700`}
       >
         {/* Traffic light buttons and path */}
         <div className="flex items-center space-x-3">
           {/* Traffic light buttons */}
           <div className="flex space-x-2" aria-hidden="true">
-            <div className="w-3 h-3 rounded-full bg-red-500"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors duration-200"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors duration-200"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors duration-200"></div>
           </div>
           {/* Current path */}
           <div
@@ -51,8 +51,10 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
         )}
       </div>
 
-      {/* Content area */}
-      <div className="p-6">{children}</div>
+      {/* Terminal content */}
+      <div className="p-5 md:p-6 font-mono text-gray-800 dark:text-gray-200">
+        {children}
+      </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import { Certification } from "./Certification";
 import { Education } from "./Education";
 import { SocialLink } from "./SocialLink";
 import { NavigationItem } from "./NavigationItem";
+import { Tag } from "./Tag";
 
 export const entities = [
   Project,
@@ -16,4 +17,5 @@ export const entities = [
   Education,
   SocialLink,
   NavigationItem,
+  Tag,
 ];

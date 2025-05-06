@@ -1,6 +1,4 @@
-import { Project, Technology } from '@/types';
-
-export const projects: Project[] = [
+export const projects = [
   {
     id: 'project-1',
     title: 'EchoScribe',

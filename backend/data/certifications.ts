@@ -1,7 +1,6 @@
-import {Certification} from "@/types/certification";
-
-export const certifications: Certification[] = [
+export const certifications = [
   {
+    id: 'cert-1',
     name: "AWS Solutions Architect Associate",
     issuer: "Amazon Web Services",
     date: "2023",
@@ -9,6 +8,7 @@ export const certifications: Certification[] = [
     credentialId: "ABC12345"
   },
   {
+    id: 'cert-2',
     name: "AWS Cloud Practitioner",
     issuer: "Amazon Web Services",
     date: "2022",
@@ -16,6 +16,7 @@ export const certifications: Certification[] = [
     credentialId: "DEF67890"
   },
   {
+    id: 'cert-3',
     name: "Azure Fundamentals",
     issuer: "Microsoft",
     date: "2022",

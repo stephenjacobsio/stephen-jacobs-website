@@ -4,7 +4,7 @@ import { BlogPost } from "../entities/BlogPost";
 
 const blogPostRepository = AppDataSource.getRepository(BlogPost);
 
-export const getAllBlogPosts = async (req: Request, res: Response) => {
+export const getAllBlogPosts = async (req: any, res: Response) => {
   try {
     const posts = await blogPostRepository.find({ relations: ["tags"] });
     res.json(posts);
@@ -13,7 +13,7 @@ export const getAllBlogPosts = async (req: Request, res: Response) => {
   }
 };
 
-export const createBlogPost = async (req: Request, res: Response) => {
+export const createBlogPost = async (req: any, res: Response) => {
   try {
     const blogPost = blogPostRepository.create(req.body);
     const savedBlogPost = await blogPostRepository.save(blogPost);

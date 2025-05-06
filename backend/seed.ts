@@ -16,7 +16,7 @@ import { blogPosts } from "./data/blog-posts";
 import { technologies } from "./data/technologies";
 import { workExperience } from "./data/work-experience";
 import { certifications } from "./data/certifications";
-import { educationData } from "./data/education";
+import { education } from "./data/education";
 import { socialLinks } from "./data/social-links";
 
 const seedDatabase = async () => {
@@ -108,7 +108,7 @@ const seedDatabase = async () => {
 
     // Seed education
     console.log("🎓 Seeding education...");
-    for (const edu of educationData) {
+    for (const edu of education) {
       const newEducation = educationRepository.create(edu);
       await educationRepository.save(newEducation);
     }

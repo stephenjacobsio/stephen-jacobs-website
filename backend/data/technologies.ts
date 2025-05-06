@@ -1,6 +1,4 @@
-import { Technology } from "@/types";
-
-export const technologies: Technology[] = [
+export const technologies = [
   // Existing Technologies
   {
     name: "React",

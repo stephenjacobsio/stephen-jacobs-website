@@ -1,12 +1,27 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
-import { Code, Terminal, Github, Linkedin, Mail } from "lucide-react";
+import { Code, Terminal, Github, Linkedin, Mail, ArrowRight } from "lucide-react";
+import dynamic from "next/dynamic";
 import type { Project, BlogPost, Technology } from "@/types";
 import TerminalWindow from "@/components/ui/TerminalWindow";
-import BlogCard from "@/components/blog/BlogCard";
 import SectionHeader from "@/components/ui/SectionHeader";
-import ProjectCard from "@/components/projects/ProjectCard";
-import TechGrid from "@/components/technologies/TechGrid";
+import { Skeleton } from "@/components/ui/Skeleton";
+
+// Dynamically import heavy components
+const BlogCard = dynamic(() => import("@/components/blog/BlogCard"), {
+  loading: () => <Skeleton className="h-64 w-full rounded-lg" />,
+  ssr: true
+});
+
+const ProjectCard = dynamic(() => import("@/components/projects/ProjectCard"), {
+  loading: () => <Skeleton className="h-64 w-full rounded-lg" />,
+  ssr: true
+});
+
+const TechGrid = dynamic(() => import("@/components/technologies/TechGrid"), {
+  loading: () => <Skeleton className="h-32 w-full rounded-lg" />,
+  ssr: true
+});
 
 interface HeroSectionProps {
   title: string;
@@ -33,55 +48,72 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   ];
 
   return (
-    <section className="max-w-4xl mx-auto">
+    <section className="max-w-5xl mx-auto">
       <TerminalWindow path="~/stephen/intro.sh">
-        <div className="space-y-8">
+        <div className="space-y-10">
           {/* Welcome Message */}
           <div className="flex items-center space-x-2 font-mono text-sm text-green-500">
-            Welcome to stephenjacobs.io <span className="text-gray-500">(v1.0.0)</span>
+            <span className="animate-pulse">▋</span> Welcome to stephenjacobs.io <span className="text-gray-500">(v1.0.0)</span>
           </div>
 
           {/* Introduction */}
-          <div className="space-y-2">
-            <h1 className="text-5xl font-mono text-cyan-600 dark:text-cyan-400">Stephen Jacobs</h1>
-            <p className="text-xl font-mono text-gray-700 dark:text-gray-300">
+          <div className="space-y-3">
+            <h1 className="text-5xl font-mono font-bold text-gradient gradient-cyan-blue pb-1">Stephen Jacobs</h1>
+            <p className="text-xl font-mono text-gray-700 dark:text-gray-300 leading-relaxed">
               Full-stack developer passionate about building elegant solutions
             </p>
           </div>
 
+          {/* Social Links */}
+          <div className="flex flex-wrap gap-4">
+            {socialLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-cyan-100 dark:hover:bg-cyan-900/30 transition-all duration-300 border border-gray-200 dark:border-gray-700"
+              >
+                <link.icon size={16} className="text-cyan-600 dark:text-cyan-400" />
+                <span className="text-sm">{link.label}</span>
+              </Link>
+            ))}
+          </div>
+
           {/* Quick Links */}
-          <div className="space-y-4">
+          <div className="space-y-5">
             <SectionHeader title="Quick Links" icon={Code} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {quickLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex justify-between items-center p-4 border rounded-lg hover:border-cyan-500 transition-all
-                    bg-gray-50 border-gray-300 text-gray-700 hover:text-cyan-600
-                    dark:bg-gray-900/50 dark:border-gray-700 dark:text-gray-300 dark:hover:text-cyan-400"
+                  className="flex justify-between items-center p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-cyan-500 dark:hover:border-cyan-500 transition-all duration-300
+                    bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-cyan-600 dark:hover:text-cyan-400 shadow-subtle hover:shadow-md"
                 >
-                  <span>{link.label}</span>
-                  <link.icon size={16} />
+                  <span className="font-medium">{link.label}</span>
+                  <ArrowRight size={16} className="text-cyan-500" />
                 </Link>
               ))}
             </div>
           </div>
 
           {/* Featured Technologies */}
-          <section>
+          <section className="pt-2">
             <SectionHeader
               title="Technologies"
               icon={Code}
               action={{ label: "View all experience", href: "/about" }}
             />
-            <TechGrid
-              technologies={technologies}
-            />
+            <Suspense fallback={<Skeleton className="h-32 w-full rounded-lg" />}>
+              <TechGrid
+                technologies={technologies}
+              />
+            </Suspense>
           </section>
 
           {/* Featured Projects */}
-          <section>
+          <section className="pt-2">
             <SectionHeader
               title="Featured Projects"
               icon={Terminal}
@@ -89,13 +121,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {featuredProjects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
+                <Suspense key={project.id} fallback={<Skeleton className="h-64 w-full rounded-lg" />}>
+                  <ProjectCard project={project} />
+                </Suspense>
               ))}
             </div>
           </section>
 
           {/* Latest Blog Posts */}
-          <section>
+          <section className="pt-2">
             <SectionHeader
               title="Latest Posts"
               icon={Terminal}
@@ -103,7 +137,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {featuredPosts.map((post) => (
-                <BlogCard key={post.id} post={post} />
+                <Suspense key={post.id} fallback={<Skeleton className="h-64 w-full rounded-lg" />}>
+                  <BlogCard post={post} />
+                </Suspense>
               ))}
             </div>
           </section>

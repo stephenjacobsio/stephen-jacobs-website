@@ -2,7 +2,7 @@ import { format, parseISO } from "date-fns";
 import type { BlogPost, Project, Technology } from "@/types";
 
 /** Base URL for API requests */
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api/v1';
 
 /**
  * Generic function to fetch data from the API with error handling.
@@ -13,10 +13,19 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/a
  * @throws Will throw an error if the API response is not ok.
  */
 async function fetchApi<T>(endpoint: string): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${endpoint}`);
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    mode: 'cors'
+  });
+  
   if (!response.ok) {
+    console.error(`API Error: ${response.status} - ${response.statusText}`);
     throw new Error(`API Error: ${response.statusText}`);
   }
+  
   return response.json();
 }
 

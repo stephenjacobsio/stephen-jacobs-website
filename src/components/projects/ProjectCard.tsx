@@ -1,7 +1,10 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { ExternalLink, Github } from "lucide-react";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 import type { Project } from "@/types";
 
 interface ProjectCardProps {
@@ -10,76 +13,70 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, minimal = false }) => {
+  const { title, description, longDescription, technologies, imageUrl, githubUrl, demoUrl } = project;
+
   return (
-    <div
-      className={`group rounded-lg p-4 border transition-all duration-200 
-        bg-gray-50 border-gray-300 hover:border-cyan-600 
-        dark:bg-gray-900/50 dark:border-gray-700 dark:hover:border-cyan-500 
-        ${minimal ? "h-auto" : "h-full"}`}
-    >
-      {/* Header Section */}
-      <div className="flex items-center justify-between mb-2">
-        <h3 className="font-mono text-gray-900 group-hover:text-cyan-600 dark:text-gray-100 dark:group-hover:text-cyan-400 transition-colors">
-          {project.title}
-        </h3>
-
-        <div className="flex items-center space-x-2">
-          {project.githubUrl && (
-            <Link
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View ${project.title} on GitHub`}
-              className="text-gray-600 hover:text-cyan-600 dark:text-gray-500 dark:hover:text-cyan-400 transition-colors"
-            >
-              <Github size={16} />
-            </Link>
-          )}
-          {project.demoUrl && (
-            <Link
-              href={project.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View demo of ${project.title}`}
-              className="text-gray-600 hover:text-cyan-600 dark:text-gray-500 dark:hover:text-cyan-400 transition-colors"
-            >
-              <ExternalLink size={16} />
-            </Link>
-          )}
-        </div>
-      </div>
-
-      {/* Description */}
-      <p className="text-sm mb-4 text-gray-700 dark:text-gray-400">
-        {minimal ? project.description : project.longDescription || project.description}
-      </p>
-
-      {/* Optional Image */}
-      {!minimal && project.imageUrl && (
-        <div className="mb-4 rounded-md overflow-hidden">
+    <Card className={`h-full flex flex-col ${minimal ? "h-auto" : ""}`}>
+      {imageUrl && (
+        <div className="relative w-full h-48 overflow-hidden rounded-t-lg">
           <Image
-            src={project.imageUrl}
-            alt={project.title}
-            width={600}
-            height={200}
-            layout="responsive"
-            className="object-cover"
+            src={imageUrl}
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            loading={minimal ? "lazy" : "eager"}
+            priority={!minimal}
+            className="object-cover transition-transform duration-300 hover:scale-105"
           />
         </div>
       )}
-
-      {/* Technologies */}
-      <div className="flex flex-wrap gap-2">
-        {project.technologies.map((tech) => (
-          <span
-            key={tech}
-            className="text-xs px-2 py-1 rounded bg-gray-200 text-gray-600 dark:bg-gray-800 dark:text-gray-400"
+      
+      <CardHeader>
+        <CardTitle className="font-mono text-lg font-semibold text-gray-900 group-hover:text-cyan-600 dark:text-gray-100 dark:group-hover:text-cyan-400 transition-all">
+          {title}
+        </CardTitle>
+      </CardHeader>
+      
+      <CardContent className="flex-grow">
+        <p className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">
+          {minimal ? description : longDescription || description}
+        </p>
+        
+        <div className="flex flex-wrap gap-2 mb-4">
+          {technologies.map((tech) => (
+            <Badge key={tech} variant="secondary">
+              {tech}
+            </Badge>
+          ))}
+        </div>
+      </CardContent>
+      
+      <CardFooter className="flex gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+        {githubUrl && (
+          <Button 
+            href={githubUrl}
+            variant="outline"
+            size="sm"
+            leftIconName="Github"
+            isExternal
           >
-            {tech}
-          </span>
-        ))}
-      </div>
-    </div>
+            Code
+          </Button>
+        )}
+        
+        {demoUrl && (
+          <Button 
+            href={demoUrl}
+            variant="primary"
+            size="sm"
+            leftIconName="ExternalLink"
+            isExternal
+          >
+            Live Demo
+          </Button>
+        )}
+      </CardFooter>
+    </Card>
   );
 };
 

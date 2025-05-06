@@ -1,7 +1,6 @@
-import {WorkExperience} from "@/types/workExperience";
-
-export const workExperience: WorkExperience[] = [
+export const workExperience = [
   {
+    id: 'work-1',
     title: "Associate Director of Software Engineering",
     company: "Material",
     period: "March 2022 - January 2024",
@@ -14,6 +13,7 @@ export const workExperience: WorkExperience[] = [
     location: "Valencia, CA"
   },
   {
+    id: 'work-2',
     title: "Senior Software Engineer",
     company: "Material",
     period: "August 2021 - March 2022",
@@ -26,6 +26,7 @@ export const workExperience: WorkExperience[] = [
     location: "Valencia, CA"
   },
   {
+    id: 'work-3',
     title: "DevOps Engineer",
     company: "Matrica Labs",
     period: "March 2021 - November 2021",
@@ -37,6 +38,7 @@ export const workExperience: WorkExperience[] = [
     location: "Valencia, CA"
   },
   {
+    id: 'work-4',
     title: ".NET Developer",
     company: "Scorpion",
     period: "March 2019 - August 2021",

@@ -1,13 +1,16 @@
-import { BlogPost } from '@/types';
-
-export const posts: BlogPost[] = [
+export const blogPosts = [
   {
     id: 'post-1',
     title: 'Setting Up a Proxmox VE 8.3 Cluster with Proxmox Backup Server 8.3',
     date: '2024-03-01',
     excerpt: 'A comprehensive guide to building and managing a high-availability Proxmox VE cluster with integrated Proxmox Backup Server for robust virtualization and backups.',
     slug: 'proxmox-ve-cluster-backup-server',
-    tags: ['Proxmox VE', 'Virtualization', 'Backup', 'High Availability'],
+    tags: [
+      { name: 'Proxmox VE' },
+      { name: 'Virtualization' },
+      { name: 'Backup' },
+      { name: 'High Availability' }
+    ],
     category: 'Infrastructure',
     featured: true,
   },
@@ -17,7 +20,15 @@ export const posts: BlogPost[] = [
     date: '2024-03-10',
     excerpt: 'Learn how to set up an automated media request pipeline using Jellyfin, Radarr, Sonarr, Prowlarr, Jellyseerr, and Sabnzbd for a seamless home media experience.',
     slug: 'automated-media-request-pipeline',
-    tags: ['Jellyfin', 'Radarr', 'Sonarr', 'Prowlarr', 'Jellyseerr', 'Sabnzbd', 'Media Server'],
+    tags: [
+      { name: 'Jellyfin' },
+      { name: 'Radarr' },
+      { name: 'Sonarr' },
+      { name: 'Prowlarr' },
+      { name: 'Jellyseerr' },
+      { name: 'Sabnzbd' },
+      { name: 'Media Server' }
+    ],
     category: 'Home Automation',
     featured: true,
   },
@@ -27,7 +38,13 @@ export const posts: BlogPost[] = [
     date: '2024-03-20',
     excerpt: 'Step-by-step instructions for setting up a Raspberry Pi cluster with PoE hats, installing K3s, and running containerized workloads efficiently.',
     slug: 'raspberry-pi-cluster-k3s',
-    tags: ['Raspberry Pi', 'K3s', 'Kubernetes', 'PoE', 'Cluster'],
+    tags: [
+      { name: 'Raspberry Pi' },
+      { name: 'K3s' },
+      { name: 'Kubernetes' },
+      { name: 'PoE' },
+      { name: 'Cluster' }
+    ],
     category: 'Edge Computing',
     featured: true,
   },

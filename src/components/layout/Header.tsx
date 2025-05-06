@@ -38,21 +38,21 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className="w-full bg-gray-900 text-gray-100 border-b border-gray-800">
-      <nav className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="font-mono text-lg flex items-center space-x-2 group">
+    <header className="w-full bg-gray-900 text-gray-100 border-b border-gray-800 shadow-md sticky top-0 z-50">
+      <nav className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+        <Link href="/" className="font-mono text-lg flex items-center space-x-2 group transition-all duration-300">
           <span className="text-cyan-400">~</span>
           <span className="text-blue-500">&gt;</span>
-          <span className="text-green-500 group-hover:underline">Stephen</span>
+          <span className="text-green-500 group-hover:text-green-400">Stephen</span>
           <span className="text-gray-100">Jacobs</span>
         </Link>
 
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-8">
           {menuItems.map(({ href, label, icon: Icon }) => (
             <Link
               key={href}
               href={href}
-              className={`font-mono flex items-center space-x-2 transition-colors duration-200 ${
+              className={`font-mono flex items-center space-x-2 transition-all duration-300 ${
                 pathname === href
                   ? "text-cyan-400"
                   : "text-gray-400 hover:text-cyan-400"
@@ -67,7 +67,7 @@ const Header: React.FC = () => {
           {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-md transition-colors duration-200 hover:bg-gray-800"
+            className="p-2 rounded-md transition-all duration-300 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50"
             aria-label="Toggle Theme"
           >
             {isDarkMode ? (

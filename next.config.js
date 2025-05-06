@@ -8,6 +8,15 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+  // Add performance optimizations
+  poweredByHeader: false,
+  compress: true,
+  // Enable ISR for faster page loads
+  experimental: {
+    // Enable optimizations
+    optimizeCss: true,
+    scrollRestoration: true,
+  },
 };
 
 module.exports = nextConfig;

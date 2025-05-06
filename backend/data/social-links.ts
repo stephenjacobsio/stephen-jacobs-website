@@ -1,8 +1,6 @@
-import { DeepPartial } from 'typeorm';
-import { SocialLink } from '../entities/SocialLink';
-
-export const socialLinks: DeepPartial<SocialLink>[] = [
+export const socialLinks = [
   {
+    id: 'social-1',
     platform: 'GitHub',
     url: 'https://github.com/yourusername',
     label: 'Follow me on GitHub',
@@ -10,6 +8,7 @@ export const socialLinks: DeepPartial<SocialLink>[] = [
     visible: true
   },
   {
+    id: 'social-2',
     platform: 'LinkedIn',
     url: 'https://linkedin.com/in/yourusername',
     label: 'Connect with me on LinkedIn',

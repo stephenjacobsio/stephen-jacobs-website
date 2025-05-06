@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, ArrowRight } from "lucide-react";
 
 interface SectionHeaderProps {
   title: string;
@@ -13,23 +13,31 @@ interface SectionHeaderProps {
 
 const SectionHeader: React.FC<SectionHeaderProps> = ({ title, icon: Icon, action }) => {
   return (
-    <div className="flex items-center justify-between mb-6">
+    <div className="flex items-center justify-between mb-6 pb-2 border-b border-gray-200 dark:border-gray-700">
       {/* Title with Icon */}
-      <div className="flex items-center text-cyan-400 font-mono text-sm">
-        {Icon && <Icon size={16} className="mr-2" aria-hidden="true" />}
-        <span>{title}</span>
+      <div className="flex items-center space-x-2">
+        {Icon && (
+          <div className="p-1.5 rounded-md bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400">
+            <Icon size={18} aria-hidden="true" />
+          </div>
+        )}
+        <h2 className="font-mono text-base font-semibold text-gray-800 dark:text-gray-200">
+          {title}
+        </h2>
       </div>
 
       {/* Action Link */}
       {action && (
         <Link
           href={action.href}
-          className="text-sm transition-colors duration-200 font-mono 
-            text-gray-600 hover:text-gray-900 focus:text-gray-900 
-            dark:text-gray-400 dark:hover:text-cyan-400 dark:focus:text-cyan-400"
+          className="flex items-center space-x-1 text-sm transition-all duration-300 font-mono 
+            text-gray-600 hover:text-cyan-600 focus:text-cyan-600 
+            dark:text-gray-400 dark:hover:text-cyan-400 dark:focus:text-cyan-400
+            group"
           aria-label={`Navigate to ${action.label}`}
         >
-          {action.label} →
+          <span>{action.label}</span>
+          <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform duration-300" />
         </Link>
       )}
     </div>

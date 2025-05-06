@@ -10,12 +10,20 @@ import {
 import PageLayout from "@/components/layout/PageLayout";
 import SectionHeader from "@/components/ui/SectionHeader";
 import TechGrid from "@/components/technologies/TechGrid";
-import { technologies } from "@/data/technologies";
-import { education } from "@/data/education";
-import { workExperience } from "@/data/work-experience";
-import { certifications } from "@/data/certifications";
+import { getTechnologies } from "@/services/technologyService";
+import { getEducation } from "@/services/educationService";
+import { getWorkExperience } from "@/services/workExperienceService";
+import { getCertifications } from "@/services/certificationService";
 
-const AboutPage = () => {
+const AboutPage = async () => {
+  // Fetch data from API services
+  const [technologies, education, workExperience, certifications] = await Promise.all([
+    getTechnologies(),
+    getEducation(),
+    getWorkExperience(),
+    getCertifications()
+  ]);
+
   return (
     <PageLayout title="About" path="~/stephen/about">
       <div className="space-y-16">
@@ -53,7 +61,7 @@ const AboutPage = () => {
           <div className="space-y-8">
             {workExperience.map((job, index) => (
               <div
-                key={index}
+                key={job.id || index}
                 className="p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 shadow-md hover:shadow-lg transition duration-300"
               >
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
@@ -79,7 +87,7 @@ const AboutPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {education.map((edu, index) => (
               <div
-                key={index}
+                key={edu.id || index}
                 className="p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 shadow-md"
               >
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
@@ -100,7 +108,7 @@ const AboutPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {certifications.map((cert, index) => (
               <div
-                key={index}
+                key={cert.id || index}
                 className="p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 shadow-md"
               >
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">

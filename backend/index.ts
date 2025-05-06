@@ -1,7 +1,11 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
+import cors from "cors";
+import helmet from "helmet";
+import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
-import swaggerJsDoc from "swagger-jsdoc";
+import swaggerJsdoc from "swagger-jsdoc";
+import compression from "compression";
 import { AppDataSource } from "./data-source";
 import routes from "./routes";
 
@@ -10,10 +14,34 @@ dotenv.config();
 
 // Create Express app
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5002;
+
+// Add compression middleware
+app.use(compression());
+
+// Set security-related headers with Helmet
+app.use(helmet());
+
+// Enable CORS
+app.use(cors());
 
 // Middleware for parsing JSON
 app.use(express.json());
+
+// HTTP request logger
+app.use(morgan("dev"));
+
+// Add cache control headers
+app.use((req: Request, res: Response, next: NextFunction) => {
+  // Cache GET requests for 5 minutes
+  if (req.method === 'GET') {
+    res.setHeader('Cache-Control', 'public, max-age=300');
+  } else {
+    // For non-GET requests, set no-cache
+    res.setHeader('Cache-Control', 'no-store');
+  }
+  next();
+});
 
 // Swagger setup
 const swaggerOptions = {
@@ -39,7 +67,7 @@ const swaggerOptions = {
   apis: ["./routes/*.ts", "./entities/*.ts"], // Path to your API and entity files for Swagger documentation
 };
 
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Health check endpoint

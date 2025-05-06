@@ -3,7 +3,7 @@ import { getAllBlogPosts, createBlogPost } from "../controllers/BlogPostControll
 
 const router = express.Router();
 
-router.get("/blog-posts", getAllBlogPosts);
-router.post("/blog-posts", createBlogPost);
+router.get("/", getAllBlogPosts);
+router.post("/", createBlogPost);
 
 export default router;
